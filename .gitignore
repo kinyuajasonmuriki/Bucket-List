@@ -52,4 +52,4 @@ venv/
 ENV/
 .spyderproject
 .ropeproject
-.idea
+.idea/
