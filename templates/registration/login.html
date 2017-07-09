@@ -28,7 +28,7 @@
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line" id="div_username">
-                            <input type="text" class="form-control" name="username" placeholder="Username" required autofocus>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username" required autofocus>
                         </div>
                         <span id="username-err_" style="color: red"></span>
                     </div>
@@ -37,7 +37,7 @@
                             <i class="material-icons">lock</i>
                         </span>
                         <div class="form-line" id="div_password">
-                            <input type="password" class="form-control" name="password" placeholder="Password" required>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                         </div>
                         <span id="password-err_" class="error" style="color: red"></span>
                     </div>
@@ -47,7 +47,7 @@
                             <label for="rememberme">Remember Me</label>
                         </div>
                         <div class="col-xs-4">
-                            <button class="btn btn-block bg-blue waves-effect" type="submit" onclick="login()">SIGN IN</button>
+                            <button class="btn btn-block bg-blue" type="submit" onclick="login()">SIGN IN</button>
                             <input type="hidden" name="redirect_url" value="{{ redirect_url }}" />
                         </div>
                     </div>
@@ -63,7 +63,7 @@
             </div>
         </div>
     </div>
-
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="{{ url_for('static',  filename='plugins/jquery/jquery.min.js' )}}"></script>
     <script src="{{ url_for('static',  filename='plugins/bootstrap/js/bootstrap.min.js' )}} "></script>
     <script src="{{ url_for('static',  filename='plugins/node-waves/waves.js' )}}"></script>

@@ -27,52 +27,28 @@
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control"  name="username" placeholder="Username" required autofocus>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">person</i>
-                        </span>
-                        <div class="form-line">
-                            <input type="text" class="form-control"  name="full_name" placeholder="Name" required>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">email</i>
-                        </span>
-                        <div class="form-line">
-                            <input type="email" class="form-control" name="email" placeholder="Email Address">
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">phone</i>
-                        </span>
-                        <div class="form-line">
-                            <input type="text" class="form-control" name="phone" placeholder="Phone Number" id="phone"
-                            data-mask="0000000000">
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">lock</i>
-                        </span>
-                        <div class="form-line">
-                            <input type="password" class="form-control" name="password" minlength="6" placeholder="Password" required>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">lock</i>
-                        </span>
-                        <div class="form-line">
-                            <input type="password" class="form-control" name="confirm_password" minlength="6" placeholder="Confirm Password" required>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username" required autofocus>
                         </div>
                     </div>
 
-                    <button class="btn btn-block btn-lg bg-blue waves-effect" type="submit" onclick="signUp()">SIGN UP</button>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="password" class="form-control" id="password" name="password" minlength="6" placeholder="Password" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="password" class="form-control" id='confirm_password' name="confirm_password" minlength="6" placeholder="Confirm Password" required>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-block btn-lg bg-blue " type="submit" onclick="signUp()">SIGN UP</button>
 
                     <div class="m-t-25 m-b--5 align-center">
                         <a href="{{ url_for('login') }}">Have an account?</a>
@@ -82,7 +58,7 @@
         </div>
     </div>
 
-
+    <script src="{{ url_for('static',  filename='js/script.js' )}}"></script>
     <script src="{{ url_for('static',  filename='plugins/jquery/jquery.min.js' )}}"></script>
     <script src="{{ url_for('static',  filename='plugins/bootstrap/js/bootstrap.min.js' )}} "></script>
     <script src="{{ url_for('static',  filename='plugins/node-waves/waves.js' )}}"></script>
