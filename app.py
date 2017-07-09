@@ -99,6 +99,8 @@ def logout():
 
 @app.route('/create_bucket', methods=['GET', 'POST'])
 def create_bucket():
+    for key, value in db.items():
+        print (key, value)
     if request.method == 'GET':
         if 'user' in session.keys():
             return render_template('create_bucket.html')
@@ -165,8 +167,9 @@ class AbstractFeatures(object):
         self.username = None
         self.bucket_name = None
         self.description = None
-        self.bucket = None
-        self.activity = None
+        self.bucket = False
+        self.activity = False
+        self.initialize()
 
     def initialize(self):
         map(lambda x: self.details.update(dict(x, )), self.args)
