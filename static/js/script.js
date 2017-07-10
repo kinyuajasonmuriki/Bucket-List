@@ -5,19 +5,19 @@ function signUp() {
     var confirm_password = $("#confirm_password").val();
 
     if (!username){
-        alert("Please enter your username");
+        swal("Error!", "Please enter your username", 'error');
         return 0;
     }
     if (!password){
-        alert("Please enter your password");
+        swal("Error!", "Please enter your password", 'error');
         return 0;
     }
     if (!confirm_password){
-        alert("Please confirm your password");
+        swal("Error!", "Please confirm your password", 'error');
         return 0;
     }
     if (confirm_password !== password){
-        alert("Passwords don't match");
+        swal("Error!", "Passwords don't match", 'error');
         return 0;
     }
 
@@ -28,13 +28,14 @@ function signUp() {
         dataType: 'text',
         success: function(response){
             var json = JSON.parse(response);
-            alert(json.success);
+            swal('Success!', json.success, 'success');
             window.location.href = '/create_bucket';
 
         },
         error: function (xhr){
             var json = JSON.parse(xhr.responseText);
-            alert(json.error)
+            swal('Error', json.error, 'error');
+            return 0;
         }
 
     })
@@ -47,11 +48,11 @@ function login(){
     var password = $("#password").val();
 
     if(!username){
-        alert("Please enter your username");
+        swal("Error!", "Please enter your username", "error");
         return 0;
     }
     if(!password){
-        alert("Please enter your password");
+        swal("Error!","Please enter your password", 'error');
         return 0;
     }
 
@@ -69,9 +70,58 @@ function login(){
         },
         error: function(xhr){
             var json = JSON.parse(xhr.responseText);
-            alert(json.error);
+            swal('Error!', json.error, 'error');
             return 0;
         }
     })
 }
 
+function createBucket(value){
+    var bucket_name = $("#bucket_name").val();
+    var description = $("#description").val();
+
+    if (!bucket_name){
+        swal("Error!", "Please enter the bucket name", 'error');
+        return 0;
+    }
+
+    if (!description){
+        swal("Error!", "Please enter the description", 'error');
+        return 0;
+    }
+
+    $.ajax({
+        url: '/create_bucket',
+        data: {bucket_name:bucket_name, description:description},
+        type: 'POST',
+        success: function(){
+            swal('Success!', 'Bucket list created successfully', 'success');
+            if (value === 1){
+                window.location.href = '/view_buckets';
+            }
+            else if (value === 2){
+                window.location.href = '/create_bucket';
+            }
+        },
+        error: function (xhr){
+            var json = JSON.parse(xhr.responseText);
+            swal('Error!', json.error, 'error');
+            return 0;
+        }
+    })
+}
+
+function addActivity(value){
+ swal("Info!", 'Working on it', 'information');
+ return 0;
+}
+
+function viewActivities(value){
+ swal("Info!", 'Working on it', 'information');
+ return 0;
+}
+
+function deleteActivity(value){
+ swal("Info!", 'Working on it', 'information');
+ return 0;
+}

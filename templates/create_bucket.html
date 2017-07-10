@@ -7,33 +7,22 @@
                 <div class="card">
                     <div class="header">
                         <h2>
+                            {{ page }}
                         </h2>
-                        <ul class="header-dropdown m-r--5">
-                            <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons">more_vert</i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="javascript:void(0);">Action</a></li>
-                                    <li><a href="javascript:void(0);">Another action</a></li>
-                                    <li><a href="javascript:void(0);">Something else here</a></li>
-                                </ul>
-                            </li>
-                        </ul>
                     </div>
                     <div class="body">
                         <form method="POST" onsubmit="return false">
                             <div class="form-group form-float">
                                 <div class="form-line">
                                     <label for="bucket_name">Bucket Name</label>
-                                    <input type="text" id="bucket_name" name="bucket_name" placeholder="Enter the bucket name" class="form-control">
+                                    <input type="text" id="bucket_name" name="bucket_name" required placeholder="Enter the bucket name" class="form-control">
                                 </div>
                             </div>
 
                             <div class="form-group form-float">
                                 <div class="form-line">
                                     <label for="description">Description</label>
-                                    <input type="text" id="description" name="description" placeholder="Enter the description" class="form-control">
+                                    <input type="text" id="description" name="description" required placeholder="Enter the description" class="form-control">
                                 </div>
                             </div>
 
@@ -46,43 +35,4 @@
         </div>
     </div>
 </section>
-{% endblock %}
-{% block script %}
-<script>
-    function createBucket(value){
-        var bucket_name = $("#bucket_name").val();
-        var description = $("#description").val();
-
-        if (!bucket_name){
-            alert("Please enter the bucket name");
-            return 0;
-        }
-
-        if (!description){
-            alert("Please enter the description");
-            return 0;
-        }
-
-        $.ajax({
-            url: '/create_bucket',
-            data: {bucket_name:bucket_name, description:description},
-            type: 'POST',
-            success: function(response){
-                var json = JSON.parse(response);
-                alert(json.success);
-                if (value === 1){
-                    window.location.href = '/view_bucket';
-                }
-                else if (value === 2){
-                    window.location.reload();
-                }
-            },
-            error: function (xhr){
-                var json = JSON.parse(xhr.responseText);
-                alert(json.error);
-                return 0;
-            }
-        })
-    }
-</script>
 {% endblock %}

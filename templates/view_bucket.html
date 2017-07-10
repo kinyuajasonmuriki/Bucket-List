@@ -7,7 +7,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                BASIC EXAMPLE
+                                {{ page }}
                             </h2>
                         </div>
                         <div class="body">
@@ -33,14 +33,24 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
+                                {% for a in details.values() %}
                                     <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                    </tr>
+                                    {% for b, c in a.items() %}
+                                        {% if b == 'bucket_name' %}
+                                            <td>{{ c }}</td>
+                                        {% elif b =='description' %}
+                                            <td>{{ c }}</td>
 
+                                        {% elif b == 'created' %}
+                                            <td>{{ c }}</td>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    <td><a onclick="addActivity()">Add Activities</a></td>
+                                    <td><a onclick="viewActivities()">View Activities</a> </td>
+                                    <td><a onclick="deleteActivity()">Delete</a></td>
+                                    </tr>
+                                {% endfor %}
                                 </tbody>
                             </table>
                         </div>

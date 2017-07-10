@@ -23,9 +23,9 @@ def create_data(*args, **kwargs ):
     return data.create_data_()
 
 
-def delete_data(*args, **kwargs):
+def read_data(*args, **kwargs):
     data = AbstractFeatures(*args, **kwargs)
-    return data.delete_data_()
+    return data.read_data_()
 
 
 def update_data(*args, **kwargs):
@@ -99,33 +99,35 @@ def logout():
 
 @app.route('/create_bucket', methods=['GET', 'POST'])
 def create_bucket():
-    for key, value in db.items():
-        print (key, value)
     if request.method == 'GET':
-        if 'user' in session.keys():
-            return render_template('create_bucket.html')
+        if 'user' in session.keys() and 'user' in session.keys() is not None:
+            return render_template('create_bucket.html', page='Create Bucket')
         else:
-            return redirect(url_for('login'))
+            return redirect({url_for('login')})
 
     if request.method == 'POST':
         username = session.get('user')
         data = request.form.to_dict()
         bucket_name = data.get('bucket_name')
         description = data.get('description')
-        data = dict(bucket=True, user=username, bucket_name=bucket_name, description=description)
+        data = dict(bucket=True, username=username, bucket_name=bucket_name, description=description)
         response = create_data(**data)
 
         if response.message:
-            return jsonify({'success': response.message})
-
-        return make_response(jsonify({'error': response.error_message}), 500)
+            return make_response(jsonify({'success': 'Bucket Created successfully'}))
 
 
 @app.route('/view_buckets')
 def view_buckets():
     if request.method == 'GET':
         if 'user' in session.keys():
-            return render_template('view_bucket.html')
+            details = read_data(username=session.get('user'), bucket=True)
+            new_details = {}
+            for i, d in enumerate(details):
+                new_details[i] = d
+            return render_template('view_bucket.html', details=new_details, page='View Buckets')
+        else:
+            return redirect(url_for('login'))
 
 
 @app.route('/delete_bucket')
@@ -135,6 +137,8 @@ def delete_bucket():
 
 @app.route('/add_item')
 def add_item():
+    if request.method == 'GET':
+        item = request.args.get('item_name')
     return
 
 
@@ -150,6 +154,11 @@ def update_item():
 
 @app.route('/delete_item')
 def delete_item():
+    return
+
+
+@app.route('/view_activities')
+def view_activities():
     return
 
 
@@ -169,6 +178,7 @@ class AbstractFeatures(object):
         self.description = None
         self.bucket = False
         self.activity = False
+        self.filtered = None
         self.initialize()
 
     def initialize(self):
@@ -178,15 +188,14 @@ class AbstractFeatures(object):
 
     def create_data_(self):
         def add_bucket():
-            values = [
-                dict(user=self.username, bucket_name=self.bucket_name, description=self.description,
-                     created=date.today())
-            ]
+
+            values = dict(user=self.username, bucket_name=self.bucket_name, description=self.description,
+                          created=date.today())
 
             if 'buckets' in db.keys():
                 db['buckets'].append(values)
             else:
-                db['buckets'] = values
+                db['buckets'] = [values]
             self.message = 'Data created successfully'
             return self
 
@@ -200,7 +209,12 @@ class AbstractFeatures(object):
             return add_activity()
 
     def read_data_(self):
-        pass
+        try:
+            self.filtered = [item for item in db['buckets'] if item['user'] == self.username]
+            return self.filtered
+
+        except KeyError:
+            return False
 
     def update_data_(self):
         pass

@@ -10,7 +10,7 @@
     <link href="{{ url_for('static', filename='plugins/node-waves/waves.css')}}" rel="stylesheet" />
     <link href="{{ url_for('static', filename='plugins/animate-css/animate.css')}}" rel="stylesheet" />
     <link href="{{ url_for('static', filename='css/style.min.css')}}" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='plugins/sweetalert/sweetalert.css')}}" rel="stylesheet">
 </head>
 
 <body class="login-page">
@@ -63,11 +63,12 @@
             </div>
         </div>
     </div>
+
+    <script src="{{ url_for('static', filename='plugins/sweetalert/sweetalert.min.js')}}"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="{{ url_for('static',  filename='plugins/jquery/jquery.min.js' )}}"></script>
     <script src="{{ url_for('static',  filename='plugins/bootstrap/js/bootstrap.min.js' )}} "></script>
     <script src="{{ url_for('static',  filename='plugins/node-waves/waves.js' )}}"></script>
     <script src="{{ url_for('static',  filename='plugins/jquery-validation/jquery.validate.js' )}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js"></script>
 </body>
 </html>
